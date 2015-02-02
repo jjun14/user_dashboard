@@ -43,6 +43,11 @@
     {
       margin-top: 20px;
     }
+
+    .success 
+    {
+      color: green;
+    }
   </style>
   <script type="text/javascript">
     $(document).ready(function()
@@ -67,9 +72,16 @@
       <div class="col-md-5">
       </div>
       <div class="col-md-1">
-        <a class="btn btn-primary" href="/users/add_user">Add New</a>
+        <a class="btn btn-primary" href="/users/new">Add New</a>
       </div>
     </div>
+    <?php 
+        if($this->session->userdata('success'))
+        {
+          echo $this->session->userdata('success');
+          $this->session->unset_userdata('success');
+        }
+    ?>
     <div class="row">
       <div class="table-responsive">
         <table class="table table-bordered table-striped top-buffer">

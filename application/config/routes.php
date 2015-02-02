@@ -2,5 +2,6 @@
 
 $route['default_controller'] = "main/home";
 $route['404_override'] = '';
+$route['users/new'] = "users/add";
 
 //end of routes.php

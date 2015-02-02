@@ -32,12 +32,22 @@ class Users extends CI_Controller {
 
   public function add()
   {
-    // var_dump($this->input->post());
-    // echo "got here";
-    // die();
     $post = $this->input->post();
     $this->Validation->validate_add_new($post);
     redirect('/users/add_user');
+  }
+
+  public function edit($id)
+  {
+    $this->load->view('users/edit_admin', array("edit_id"=>$id));
+  }
+
+  public function edit_in_db()
+  {
+    $this->load->model('Validation');
+    $post = $this->input->post();
+    $this->Validation->validate_edit_user($post);
+    redirect('/dashboard/admin');
   }
 
   public function remove($id)

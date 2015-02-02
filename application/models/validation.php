@@ -2,10 +2,13 @@
 
 class Validation extends CI_MODEL
 {
-  function validate_regis($post)
+  function __construct()
   {
     $this->load->library('form_validation');
     $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
+  }
+  function validate_regis($post)
+  {
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
     $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
     $this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha|min_length[2]');
@@ -53,8 +56,6 @@ class Validation extends CI_MODEL
   function validate_sign_in($post)
   {
     // var_dump($post);
-    $this->load->library('form_validation');
-    $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
     $this->form_validation->set_rules('password', 'Password', 'required');
     if($this->form_validation->run() === false)
@@ -92,8 +93,6 @@ class Validation extends CI_MODEL
 
   function validate_add_new($post)
   {
-    $this->load->library('form_validation');
-    $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
     $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
     $this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha|min_length[2]');
@@ -111,6 +110,53 @@ class Validation extends CI_MODEL
       $this->session->set_flashdata('success', "<p class='success'>Successfully added user</p>");
       return true;
     }
+  }
+
+  function validate_edit_user($post)
+  {
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+    $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
+    $this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha|min_length[2]');
+    if($this->form_validation->run() === FALSE)
+    {
+      $this->session->set_flashdata('errors', validation_errors());
+      redirect("/users/edit/{$post['edit_id']}",  array("edit_id"=> $post['edit_id']));
+    }
+    else
+    {
+      $query = "UPDATE users
+                SET email = ?, first_name = ?, last_name = ?, user_level_id = ?, updated_at = NOW()
+                WHERE id = ?";
+      if($post['user_level'] == "Normal")
+      {
+        $values = array($post['email'], $post['first_name'], $post['last_name'], 2, $post['edit_id']);
+      }
+      else if($post['user_level'] == "Admin")
+      {
+        $values = array($post['email'], $post['first_name'], $post['last_name'], 1, $post['edit_id']);
+      }
+      $this->session->set_userdata('success', "<p class='success'>Successfully updated user</p>");
+      $this->db->query($query, $values);
+    }
+  }
+
+  // function validate_edit_password($post)
+  // {
+  //   $this->form_validation->set_rules('password', "Password", 'required|alpha_numeric|min_length[6]|match[confirm_password]');
+  //   $this->form_validation->set_rules('confirm_password', "Confirm Password", 'required');
+  //   if($this->form_validation->run() === FALSE)
+  //   {
+  //     $this->session->set_flashdata('errors', validation_errors());
+  //     redirect("/users/edit/{$post['edit_id']}",  array("edit_id"=> $post['edit_id']));
+  //   }
+  //   else
+  //   {
+  //     $query = "UPDATE users
+  //         SET password = ?, updated_at = NOW()
+  //         WHERE id = ?";
+  //     $values = array($post['password']);
+
+  //   }
   }
 
 

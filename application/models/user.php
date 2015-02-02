@@ -24,10 +24,6 @@ class User extends CI_MODEL
   }
 
 
-
-
-
-
   // function add_order($info)
   // {
   //   $query = "INSERT INTO orders (billing_id, amount, created_at, updated_at) VALUES (?,?,?,?)";

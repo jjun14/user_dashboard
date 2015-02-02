@@ -23,6 +23,16 @@
     {
       border: 2px solid black;
     }
+
+    .error
+    {
+      color: red;
+    }
+
+    .success
+    {
+      color: green;
+    }
   </style>
 </head>
 <body>
@@ -38,18 +48,24 @@
   <div class="container">
     <div class="row">
       <div class="col-md-5">
-        <h2>Edit user #[user_id]</h2>
+        <h2>Edit User #<?= $edit_id;?></h2>
       </div>
       <div class="col-md-5"></div>
-      <a class="btn btn-primary col-md-2" href="">Return to Dashboard</a>
+      <a class="btn btn-primary col-md-2" href="/dashboard/">Return to Dashboard</a>
     </div> <!-- row -->
+    <?php 
+      if($this->session->flashdata('errors'))
+      {
+        echo $this->session->flashdata('errors');
+      }
+    ?>
     <div class="row">
       <div class="col-md-6 form">
         <p>Edit Information</p>
-        <form action="" method="post">
+        <form action="/users/edit_in_db/" method="post">
           <div class="form-group">
             <label for="email">Email address:</label>
-            <input type="text" class="form-control" id="email" name="email address" placeholder="{email_address of the user}">
+            <input type="text" class="form-control" id="email" name="email" placeholder="{email_address of the user}">
           </div>
           <div class="form-group">
             <label for="first_name">First Name:</label>
@@ -68,11 +84,12 @@
           </div>
           <input class="btn btn-success" type="submit" value="Save">
           <input type="hidden" name="action" value="edit_user">
+          <input type="hidden" name="edit_id" value="<?= $edit_id; ?>">
         </form>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-5 form">
-        <form action="" method="post">
+        <form action="/users/edit_in_db/" method="post">
           <p>Change Password</p>
           <div class="form-group">
             <label for="password">Password:</label>
@@ -84,6 +101,7 @@
           </div>
           <input class="btn btn-success" type="submit" value="Update Password">
           <input type="hidden" name="action" value="edit_password">
+          <input type="hidden" name="edit_id" value="<?= $edit_id; ?>">
         </form>
       </div>
     </div> <!-- row -->

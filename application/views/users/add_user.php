@@ -71,7 +71,7 @@
 
     ?>
     <div class="row">
-        <form action="/users/add" method="post">
+        <form action="/users/new" method="post">
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">Email Address</span>
             <input type="text" class="form-control" name="email" placeholder="Email Address" aria-describedby="basic-addon1">
