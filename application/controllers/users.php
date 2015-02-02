@@ -50,6 +50,14 @@ class Users extends CI_Controller {
     redirect('/dashboard/admin');
   }
 
+  public function edit_password()
+  {
+    $this->load->model('Validation');
+    $post = $this->input->post();
+    $this->Validation->validate_edit_password($post);
+    redirect('/dashboard/admin');
+  }
+
   public function remove($id)
   {
     $this->load->model('User');

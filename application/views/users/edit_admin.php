@@ -89,7 +89,7 @@
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-5 form">
-        <form action="/users/edit_in_db/" method="post">
+        <form action="/users/edit_password/" method="post">
           <p>Change Password</p>
           <div class="form-group">
             <label for="password">Password:</label>
@@ -97,7 +97,7 @@
           </div>
           <div class="form-group">
             <label for="password_confirmation">Confirm Password:</label>
-            <input type="text" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="{new password}">
+            <input type="text" class="form-control" id="password_confirmation" name="confirm_password" placeholder="{new password}">
           </div>
           <input class="btn btn-success" type="submit" value="Update Password">
           <input type="hidden" name="action" value="edit_password">

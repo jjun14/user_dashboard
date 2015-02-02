@@ -135,28 +135,29 @@ class Validation extends CI_MODEL
       {
         $values = array($post['email'], $post['first_name'], $post['last_name'], 1, $post['edit_id']);
       }
-      $this->session->set_userdata('success', "<p class='success'>Successfully updated user</p>");
       $this->db->query($query, $values);
+      $this->session->set_userdata('success', "<p class='success'>Successfully updated user info</p>");
     }
   }
 
-  // function validate_edit_password($post)
-  // {
-  //   $this->form_validation->set_rules('password', "Password", 'required|alpha_numeric|min_length[6]|match[confirm_password]');
-  //   $this->form_validation->set_rules('confirm_password', "Confirm Password", 'required');
-  //   if($this->form_validation->run() === FALSE)
-  //   {
-  //     $this->session->set_flashdata('errors', validation_errors());
-  //     redirect("/users/edit/{$post['edit_id']}",  array("edit_id"=> $post['edit_id']));
-  //   }
-  //   else
-  //   {
-  //     $query = "UPDATE users
-  //         SET password = ?, updated_at = NOW()
-  //         WHERE id = ?";
-  //     $values = array($post['password']);
-
-  //   }
+  function validate_edit_password($post)
+  {
+    $this->form_validation->set_rules('password', "Password", 'required|alpha_numeric|min_length[6]|match[confirm_password]');
+    $this->form_validation->set_rules('confirm_password', "Confirm Password", 'required');
+    if($this->form_validation->run() === FALSE)
+    {
+      $this->session->set_flashdata('errors', validation_errors());
+      redirect("/users/edit/{$post['edit_id']}",  array("edit_id"=> $post['edit_id']));
+    }
+    else
+    {
+      $query = "UPDATE users
+          SET password = ?, updated_at = NOW()
+          WHERE id = ?";
+      $values = array(md5($post['password']), $post['edit_id']);
+      $this->db->query($query, $values);
+      $this->session->set_userdata('success', "<p class='success'>Successfully updated password</p>");
+    }
   }
 
 
