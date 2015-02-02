@@ -6,6 +6,7 @@ class Users extends CI_Controller {
   {
     parent::__construct();
     $this->output->enable_profiler();
+    $this->load->model('Validation');
   }
 
   public function home()
@@ -13,14 +14,30 @@ class Users extends CI_Controller {
     $this->load->view('main/home');
   }
 
-  public function sign_in()
+  // public function sign_in()
+  // {
+  //   $this->load->view('main/sign_in');
+  // }
+
+  // public function register()
+  // {
+  //   $this->load->view('main/register');
+  // }
+  public function add_user()
   {
-    $this->load->view('main/sign_in');
+    $this->load->view('users/add_user');
+    // echo "got here";
+    // die();
   }
 
-  public function register()
+  public function add()
   {
-    $this->load->view('main/register');
+    // var_dump($this->input->post());
+    // echo "got here";
+    // die();
+    $post = $this->input->post();
+    $this->Validation->validate_add_new($post);
+    redirect('/users/add_user');
   }
 
   public function remove($id)

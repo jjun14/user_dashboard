@@ -90,6 +90,29 @@ class Validation extends CI_MODEL
     }
   }
 
+  function validate_add_new($post)
+  {
+    $this->load->library('form_validation');
+    $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+    $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
+    $this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha|min_length[2]');
+    $this->form_validation->set_rules('password', "Password", 'required|alpha_numeric|min_length[6]|match[confirm_password]');
+    $this->form_validation->set_rules('confirm_password', "Confirm Password", 'required');
+    if($this->form_validation->run() === FALSE)
+    {
+      $this->session->set_flashdata('errors', validation_errors());
+    }
+    else
+    {
+      $query = "INSERT INTO users (email, first_name, last_name, password, description, user_level_id, created_at, updated_at) VALUES(?,?,?,?,?,?,?,?)";
+      $values = array($post['email'], $post['first_name'], $post['last_name'], md5($post['password']), NULL, 2, date("Y-m-d, H:i:s"), date("Y-m-d, H:i:s"));
+      $this->db->query($query, $values);
+      $this->session->set_flashdata('success', "<p class='success'>Successfully added user</p>");
+      return true;
+    }
+  }
+
 
 
 

@@ -37,6 +37,16 @@
       vertical-align: top;
       margin: 0px;
     }
+
+    .error
+    {
+      color: red;
+    }
+
+    .success
+    {
+      color: green;
+    }
   </style>
 </head>
 <body>
@@ -47,32 +57,43 @@
         <h2>Add a new user</h2>
       </div>
       <div class="col-md-5"></div>
-      <a class="btn btn-primary col-md-2" href="">Return to Dashboard</a>
+      <a class="btn btn-primary col-md-2" href="/dashboard/">Return to Dashboard</a>
     </div>
+    <?php
+      if($this->session->flashdata('errors'))
+      {
+        echo $this->session->flashdata('errors');
+      }
+      else if($this->session->flashdata('success'))
+      {
+        echo $this->session->flashdata('success');
+      }
+
+    ?>
     <div class="row">
-        <form action="" method="post">
+        <form action="/users/add" method="post">
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">Email Address</span>
-            <input type="text" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="email" placeholder="Email Address" aria-describedby="basic-addon1">
           </div>
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">First Name</span>
-            <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="first_name" placeholder="First Name" aria-describedby="basic-addon1">
           </div>          
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">Last Name</span>
-            <input type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" name="last_name" placeholder="Last Name" aria-describedby="basic-addon1">
           </div>
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">Password</span>
-            <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+            <input type="password" class="form-control" name="password" placeholder="Password" aria-describedby="basic-addon1">
           </div>
           <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">Password Confirmation</span>
-            <input type="password" class="form-control" placeholder="Password Confirmation" aria-describedby="basic-addon1">
+            <input type="password" class="form-control" name="confirm_password" placeholder="Password Confirmation" aria-describedby="basic-addon1">
           </div>
           <input class="btn btn-success" type="submit" value="Register">
-          <input type="hidden" name="action" value="register">
+          <input type="hidden" name="action" value="add_new">
         </form>
     </div><!-- row -->
   </div><!-- container -->

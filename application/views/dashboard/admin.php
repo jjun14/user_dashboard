@@ -29,10 +29,12 @@
       display: inline-block;
       vertical-align: top;
       margin-right: 10px;
+      text-align: left;
     }
 
     h2
     {
+      display: inline-block;
       vertical-align: top;
       margin: 0px;
     }
@@ -59,11 +61,14 @@
   <?php $this->load->view('partials/navbar_logged') ?>
   <div class="container">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <h2>Manage Users</h2>
       </div>
-      <div class="col-md-6"></div>
-      <a class="btn btn-primary col-md-1" href="">Add New</a>
+      <div class="col-md-5">
+      </div>
+      <div class="col-md-1">
+        <a class="btn btn-primary" href="/users/add_user">Add New</a>
+      </div>
     </div>
     <div class="row">
       <div class="table-responsive">
