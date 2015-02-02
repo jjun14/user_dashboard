@@ -25,8 +25,9 @@ class Users extends CI_Controller {
 
   public function remove($id)
   {
-    echo "got here";
-    die();
+    $this->load->model('User');
+    $this->User->delete_user($id);
+    redirect('/dashboard/admin');
   }
 }
 

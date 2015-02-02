@@ -41,9 +41,19 @@
     {
       margin-top: 20px;
     }
-
-    
   </style>
+  <script type="text/javascript">
+    $(document).ready(function()
+    {
+      $(".remove").click(function(){
+        var remove = confirm("Are you sure?");
+        if(remove === false)
+        {
+          return false;
+        }
+      });
+    });
+  </script>
 </head>
 <body>
   <?php $this->load->view('partials/navbar_logged') ?>
@@ -90,7 +100,7 @@
                 echo "<td>{$user['email']}</td>";
                 echo "<td>{$user['created_at']}</td>";
                 echo "<td>{$user['user_level']}</td>";
-                echo "<td><a href='/users/edit/{$user['id']}'>Edit</a><a href='/users/remove/{$user['id']}'>Remove</a></td>";
+                echo "<td><a href='/users/edit/{$user['id']}'>Edit</a><a class='remove' href='/users/remove/{$user['id']}'>Remove</a></td>";
                 echo "</tr>";
               }
             ?>

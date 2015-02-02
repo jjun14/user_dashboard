@@ -10,7 +10,7 @@ class Validation extends CI_MODEL
     $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
     $this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha|min_length[2]');
     $this->form_validation->set_rules('password', "Password", 'required|alpha_numeric|min_length[6]|match[confirm_password]');
-    $this->form_validation->set_rules('confirm_passwrod', "Confirm Password", 'required');
+    $this->form_validation->set_rules('confirm_password', "Confirm Password", 'required');
     if($this->form_validation->run() === FALSE)
     {
       $this->session->set_userdata('errors', validation_errors());

@@ -17,6 +17,11 @@ class User extends CI_MODEL
     $user_level = $this->db->query($query, $email)->row_array();
     return $user_level['user_level'];
   }
+  function delete_user($id)
+  {
+    $query = "DELETE FROM users WHERE users.id = ?";
+    return $this->db->query($query, $id);
+  }
 
 
 
