@@ -11,12 +11,12 @@ class Main extends CI_Controller {
 
 	public function home()
 	{
-    $this->load->view('home');
+    $this->load->view('main/home');
 	}
 
   public function registration_page()
   {
-    $this->load->view('register');
+    $this->load->view('/main/register');
   }
 
   public function register()
@@ -36,7 +36,7 @@ class Main extends CI_Controller {
 
   public function signin_page()
   {
-    $this->load->view('sign_in');
+    $this->load->view('main/sign_in');
   }
 
   public function sign_in()

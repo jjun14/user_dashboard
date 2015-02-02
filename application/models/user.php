@@ -9,7 +9,6 @@ class User extends CI_MODEL
                             JOIN user_levels ON users.user_level_id = user_levels.id
                             ORDER BY id ASC")->result_array();
   }
-
   function user_access($email)
   {
     $query = "SELECT user_level FROM users
