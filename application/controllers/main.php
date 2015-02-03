@@ -42,13 +42,15 @@ class Main extends CI_Controller {
   public function sign_in()
   {
     $post = $this->input->post();
-    $is_valid = $this->Validation->validate_sign_in($post);
-    if($is_valid === false)
+    $user = $this->Validation->validate_sign_in($post);
+    if($user == false)
     {
       redirect('/main/signin_page');
     }
-    else if($is_valid === true)
+    else if($user == true)
     {
+      $this->session->set_userdata('logged', true);
+      $this->session->set_userdata('id', $user['id']);
       redirect('/dashboard');
     }
   }

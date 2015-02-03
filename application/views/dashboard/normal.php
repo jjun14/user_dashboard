@@ -1,3 +1,6 @@
+<?php 
+  // var_dump($this->session->all_userdata()); 
+?>
 <html>
 <head>
   <meta charset="utf-8">

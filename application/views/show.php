@@ -51,10 +51,10 @@
 <body>
   <?php $this->load->view('/partials/navbar_logged') ?>
   <div class="container">
-    <h4>Michael Choi</h4>
+    <h4><?= $user['first_name'] . " " . $user['last_name']; ?></h4>
     <div class="row">
       <p class="col-md-2">Registered at:</p>
-      <p class="col-md-3">December 24th 2012</p>
+      <p class="col-md-3"><?= $user['created_at']; ?>2</p>
     </div><!-- row -->
     <div class="row">
       <p class="col-md-2">User ID:</p>
@@ -62,14 +62,14 @@
     </div><!-- row -->
     <div class="row">
       <p class="col-md-2">Email:</p>
-      <p class="col-md-3">michael@village88.com</p>
+      <p class="col-md-3"><?= $user['email']; ?></p>
     </div><!-- row -->
     <div class="row">
       <p class="col-md-2">Description:</p>
-      <p class="col-md-3">I am happy to be here!</p>
+      <p class="col-md-3"><?= $user['description']; ?></p>
     </div><!-- row -->
     <!-- Post Form -->
-    <h4>Leave a message for Michael</h4>
+    <h4>Leave a message for <?= $user['first_name']; ?></h4>
     <form action="">
       <textarea name="" class="form-control"></textarea>
       <div class="row">

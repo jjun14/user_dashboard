@@ -58,11 +58,15 @@
       {
         echo $this->session->flashdata('errors');
       }
+      else if($this->session->flashdata('success'))
+      {
+        echo $this->session->flashdata('success');
+      }
     ?>
     <div class="row">
       <div class="col-md-6 form">
         <p>Edit Information</p>
-        <form action="/users/edit_in_db/" method="post">
+        <form action="/users/admin_edit_info/<?= $edit_id; ?>" method="post">
           <div class="form-group">
             <label for="email">Email address:</label>
             <input type="text" class="form-control" id="email" name="email" placeholder="{email_address of the user}">
@@ -89,7 +93,7 @@
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-5 form">
-        <form action="/users/edit_password/" method="post">
+        <form action="/users/admin_edit_password/<?= $edit_id; ?>" method="post">
           <p>Change Password</p>
           <div class="form-group">
             <label for="password">Password:</label>

@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller {
 
   function index()
   {
-    $user_level = $this->User->user_access($this->session->userdata('email'));
+    $user_level = $this->User->user_access($this->session->userdata('id'));
     $users = $this->User->get_all_users();
     if($user_level == "normal")
     {

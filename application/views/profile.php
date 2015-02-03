@@ -29,6 +29,11 @@
     {
       border: 1px solid black;
     }
+
+    .success
+    {
+      color: green;
+    }
   </style>
 </head>
 <body>
@@ -39,15 +44,25 @@
         <h2>Edit profile</h2>
       </div>
       <div class="col-md-5"></div>
-      <a class="btn btn-primary col-md-2" href="">Return to Dashboard</a>
+      <a class="btn btn-primary col-md-2" href="/dashboard/">Return to Dashboard</a>
     </div> <!-- row -->
+    <?php 
+      if($this->session->flashdata('errors'))
+      {
+        echo $this->session->flashdata('errors');
+      }
+      else if($this->session->flashdata('success'))
+      {
+        echo $this->session->flashdata('success');
+      }
+    ?>
     <div class="row">
       <div class="col-md-6 form">
         <p>Edit Information</p>
-        <form action="" method="post">
+        <form action="/users/edit_info" method="post">
           <div class="form-group">
             <label for="email">Email address:</label>
-            <input type="text" class="form-control" id="email" name="email address" placeholder="{email_address of the user}">
+            <input type="text" class="form-control" id="email" name="email" placeholder="{email_address of the user}">
           </div>
           <div class="form-group">
             <label for="first_name">First Name:</label>
@@ -59,11 +74,12 @@
           </div>
           <input class="btn btn-success" type="submit" value="Save">
           <input type="hidden" name="action" value="edit_user">
+          <input type="hidden" name="edit_id" value="<?= $user['id']; ?>">
         </form>
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-5 form">
-        <form action="" method="post">
+        <form action="/users/edit_password" method="post">
           <p>Change Password</p>
           <div class="form-group">
             <label for="password">Password:</label>
@@ -71,19 +87,21 @@
           </div>
           <div class="form-group">
             <label for="password_confirmation">Confirm Password:</label>
-            <input type="text" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="{new password}">
+            <input type="text" class="form-control" id="password_confirmation" name="confirm_password" placeholder="{new password}">
           </div>
           <input class="btn btn-success" type="submit" value="Update Password">
           <input type="hidden" name="action" value="edit_password">
+          <input type="hidden" name="edit_id" value="<?= $user['id']; ?>">
         </form>
       </div>
     </div> <!-- row -->
     <div class="row">
-      <form class="form col-md-12">
+      <form action="/users/edit_description" method="post" class="form col-md-12">
         <p>Edit Description</p>
-        <textarea name="" id="" cols="128" rows="10"></textarea>
+        <textarea name="description" id="" cols="128" rows="10"></textarea>
         <input class="btn btn-success" type="submit" value="Save">
         <input type="hidden" name="action" value="edit_description">
+        <input type="hidden" name="edit_id" value="<?= $user['id']; ?>">
       </form>
     </div>
   </div> <!-- container -->
