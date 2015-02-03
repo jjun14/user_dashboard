@@ -8,6 +8,7 @@ class Users extends CI_Controller {
     $this->output->enable_profiler();
     $this->load->model('Validation');
     $this->load->model('User');
+    $this->load->model('Message');
   }
 
   public function home()
@@ -24,7 +25,7 @@ class Users extends CI_Controller {
   public function add()
   {
     $post = $this->input->post();
-    $this->Validation->validate_add_new($post);
+    $this->Validation->admin_add_new($post);
     redirect('/users/add_user');
   }
 
@@ -101,7 +102,19 @@ class Users extends CI_Controller {
   public function show($id)
   {
     $user = $this->User->get_user($id);
-    $this->load->view('show', array('user'=>$user));
+    $messages = $this->Message->get_messages($id);
+    // var_dump($messages);
+    // die();
+    // var_dump($messages);
+    $this->load->view('/users/show', array('user'=>$user, 'current_user_id'=>$this->session->userdata('id'), 'messages'=>$messages));
+  }
+
+  public function post_message()
+  {
+    $post = $this->input->post();
+    // var_dump($post);
+    $this->Message->add_message($post);
+    redirect("/users/show/{$post['recipient']}");
   }
 }
 

@@ -1,3 +1,31 @@
+<?php 
+
+function time_display($str)
+{
+  $sec = intval($str);
+  if($sec < 60)
+  {
+    echo "<div class='col-md-2 push-right'>{$sec} seconds ago</div>";
+  }
+  else if($sec < 3600)
+  {
+    $time = round($sec / 60);
+    echo "<div class='col-md-2 push-right'>{$time} minutes ago</div>";
+  }
+  else if($sec < 86400)
+  {
+    $time = round($sec / 3600);
+    echo "<div class='col-md-2 push-right'>{$time} hours ago</div>";
+  }
+  else 
+  {
+    $time = round($sec / 86400);
+    echo "<div class='col-md-2 push-right'>{$time} days ago</div>";
+  }
+}
+
+?>
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -54,11 +82,11 @@
     <h4><?= $user['first_name'] . " " . $user['last_name']; ?></h4>
     <div class="row">
       <p class="col-md-2">Registered at:</p>
-      <p class="col-md-3"><?= $user['created_at']; ?>2</p>
+      <p class="col-md-3"><?= $user['created_at']; ?></p>
     </div><!-- row -->
     <div class="row">
       <p class="col-md-2">User ID:</p>
-      <p class="col-md-3">#1</p>
+      <p class="col-md-3"><?= $user['id']; ?></p>
     </div><!-- row -->
     <div class="row">
       <p class="col-md-2">Email:</p>
@@ -70,16 +98,32 @@
     </div><!-- row -->
     <!-- Post Form -->
     <h4>Leave a message for <?= $user['first_name']; ?></h4>
-    <form action="">
-      <textarea name="" class="form-control"></textarea>
+    <form action="/users/post_message" method="post">
+      <textarea name="text" class="form-control"></textarea>
       <div class="row">
         <div class="col-md-11"></div>
         <div class="col-md-1">
-          <input class="btn btn-success button" type="button" value="Post">
+          <input class="btn btn-success button" type="submit" value="Post">
+          <input type="hidden" name="action" value="message">
+          <input type="hidden" name="recipient" value="<?= $user['id']; ?>">
+          <input type="hidden" name="current_user_id" value="<?= $current_user_id; ?>">
         </div>
       </div>
     </form>
     <!-- Beginning of Message -->
+    <?php 
+      foreach($messages as $message)
+      {
+        echo "<div class='row'>";
+        echo "<p class='col-md-3'><a href=''>{$message['name']}</a> wrote</p>";
+        echo "<div class='col-md-7'></div>";
+        time_display($message['time']);
+        echo "</div>";
+        echo "<div class='row message'>";
+        echo "<p class='col-md-12'>{$message['text']}</p>";
+        echo "</div>";
+      }
+    ?>
     <div class="row">
       <p class="col-md-3"><a href="">Mark Gullen</a> wrote</p>
       <div class="col-md-7"></div>

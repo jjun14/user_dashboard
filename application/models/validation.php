@@ -89,8 +89,8 @@ class Validation extends CI_MODEL
       return false;
     }
   }
-
-  function validate_add_new($post)
+  ///----------------------Admin Functionality-------------------------///
+  function admin_add_new($post)
   {
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
     $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha|min_length[2]');
@@ -110,7 +110,6 @@ class Validation extends CI_MODEL
       return true;
     }
   }
-
   function admin_edit_info($post)
   {
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
@@ -138,7 +137,6 @@ class Validation extends CI_MODEL
       $this->session->set_flashdata('success', "<p class='success'>Successfully updated user info</p>");
     }
   }
-
   function admin_edit_password($post)
   {
     $this->form_validation->set_rules('password', "Password", 'required|alpha_numeric|min_length[6]|match[confirm_password]');
@@ -158,7 +156,6 @@ class Validation extends CI_MODEL
       $this->session->set_flashdata('success', "<p class='success'>Successfully updated password</p>");
     }
   }
-
   function validate_edit_info($post)
   {
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
@@ -179,7 +176,6 @@ class Validation extends CI_MODEL
       $this->session->set_flashdata('success', "<p class='success'>Successfully updated user info</p>");
     }
   }
-
   function validate_edit_password($post)
   {
     $this->form_validation->set_rules('password', "Password", 'required|alpha_numeric|min_length[6]|match[confirm_password]');
@@ -199,8 +195,6 @@ class Validation extends CI_MODEL
       $this->session->set_flashdata('success', "<p class='success'>Successfully updated password</p>");
     }
   }
-
-
   function validate_edit_description($post)
   {
     $this->form_validation->set_rules('description', "Description", 'required');
@@ -219,53 +213,5 @@ class Validation extends CI_MODEL
       $this->session->set_flashdata('success', "<p class='success'>Successfully updated description</p>");
     }
   }
-
-
-
-
-  // function add_order($info)
-  // {
-  //   $query = "INSERT INTO orders (billing_id, amount, created_at, updated_at) VALUES (?,?,?,?)";
-  //   $values = array($info['billing_id'], $info['amount'], date("Y-m-d, H:i:s"), date("Y-m-d, H:i:s"));
-  //   return $this->db->query($query, $values);
-  // }
-  // function get_order()
-  // {
-  //   $query = "SELECT * FROM orders ORDER BY created_at DESC LIMIT 1";
-  //   return $this->db->query($query)->row_array();
-  // }
-  // function add_item($info)
-  // {
-  //   $query ="INSERT INTO orders_have_products (order_id, product_id, quantity) VALUES (?,?,?)";
-  //   $values = array($info['order_id'], $info['product_id'], $info['quantity']);
-  //   // var_dump($values);
-  //   // echo "hi";
-  //   // echo $values[0];
-  //   // die();
-  //   return $this->db->query($query, $values);
-  // }
-  // function order_items($info)
-  // {
-  //   // echo "arguemnent";
-  //   // var_dump($info);
-  //   if($info['shirt_count'] > 0)
-  //   {
-  //     $item_info = array('order_id'=>$info['order_id'], 'product_id'=>1, 'quantity'=>$info['shirt_count']);
-  //     // echo "item info";
-  //     // var_dump($item_info);
-  //     // die();
-  //     $this->add_item($item_info);
-  //   }
-  //   if($info['cup_count'] > 0)
-  //   {
-  //     $item_info = array('order_id'=>$info['order_id'], 'product_id'=>2, 'quantity'=>$info['cup_count']);
-  //     // echo "item info";
-  //     // var_dump($item_info);
-  //     // die();
-  //     $this->add_item($item_info);
-  //   }
-  // }
 }
-
-
 ?>

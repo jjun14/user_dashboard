@@ -64,7 +64,6 @@
 </head>
 <body>
   <?php $this->load->view('partials/navbar_logged') ?>
-  <?php var_dump($this->session->all_userdata()); ?>
   <div class="container">
     <div class="row">
       <div class="col-md-6">
