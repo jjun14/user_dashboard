@@ -31,7 +31,7 @@ class Users extends CI_Controller {
 
   public function profile()
   {
-    $this->load->view('profile', array('user'=>$this->session->userdata));
+    $this->load->view('/users/profile', array('user'=>$this->session->userdata));
   }
 
   public function edit($id)
@@ -102,10 +102,9 @@ class Users extends CI_Controller {
   public function show($id)
   {
     $user = $this->User->get_user($id);
-    $messages = $this->Message->get_messages($id);
+    $messages = $this->Message->get_messages_comments($id);
     // var_dump($messages);
     // die();
-    // var_dump($messages);
     $this->load->view('/users/show', array('user'=>$user, 'current_user_id'=>$this->session->userdata('id'), 'messages'=>$messages));
   }
 
@@ -113,8 +112,18 @@ class Users extends CI_Controller {
   {
     $post = $this->input->post();
     // var_dump($post);
+    // die();
     $this->Message->add_message($post);
-    redirect("/users/show/{$post['recipient']}");
+    redirect("/users/show/{$post['recipient_id']}");
+  }
+
+  public function post_comment()
+  {
+    $post = $this->input->post();
+    // var_dump($post);
+    // die();
+    $this->Message->add_comment($post);
+    redirect("/users/show/{$post['this_page_id']}");
   }
 }
 
