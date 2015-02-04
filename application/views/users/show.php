@@ -112,7 +112,11 @@ function time_display($str)
     <!-- Post Form -->
     <h4>Leave a message for <?= $user['first_name']; ?></h4>
     <form action="/users/post_message" method="post">
-      <textarea name="message" class="form-control"></textarea>
+      <div class="row">
+        <div class="col-md-12">
+          <textarea name="message" class="form-control"></textarea>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-11"></div>
         <div class="col-md-1">
@@ -139,7 +143,7 @@ function time_display($str)
             <div class="row message">
               <div class="col-md-12"><?= $messages[$i]['message_text']; ?></div>
             </div>
-<?php       if($messages[$i]['user2_name'])
+<?php       if($messages[$i]['user2_id'] != null)
             { 
               $comment_time = time_display($messages[$i]['time_2']);
 ?>
@@ -171,9 +175,11 @@ function time_display($str)
                 <p><?= $messages[$i]['comment_text']; ?></p>
               </div>
             </div>
-<?php     }
+<?php
+          }
           else 
-          { ?>
+          { 
+?>
             <div class="row">
               <div class="col-md-6"><a href=""><?= $messages[$i]['user1_name']; ?></a> wrote</div>
               <div class="col-md-6 push-right"><?= $message_time; ?></div>
@@ -181,14 +187,15 @@ function time_display($str)
             <div class="row message">
               <div class="col-md-12"><?= $messages[$i]['message_text']; ?></div>
             </div>
-<?php       if($messages[$i]['user2_name'])
+<?php       if($messages[$i]['user2_id'] != null)
             { 
               $comment_time = time_display($messages[$i]['time_2']);
-?>
+              // echo "<h1>HERE</h1>";
+?>            
               <div class="row">
                 <div class="col-md-1"></div>
-                <p class="col-md-6"><a href="/users/show/<?= $messages[$i]['user2_id']; ?>"><?= $messages[$i]['user2_name'];?></a> wrote:</p>
-                <p class="col-md-5 push-right"><?= $comment_time; ?></p>
+                <div class="col-md-6"><a href="/users/show/<?= $messages[$i]['user2_id']; ?>"><?= $messages[$i]['user2_name'];?></a> wrote:</div>
+                <div class="col-md-5 push-right"><?= $comment_time; ?></div>
               </div>
               <div class="row">
                 <div class="col-md-1"></div>
@@ -196,58 +203,46 @@ function time_display($str)
                   <p><?= $messages[$i]['comment_text']; ?></p>
                 </div>
               </div>
-<?php       }
-          } 
-?>
-            <!-- Comment Form -->
-<!--             <div class="row">
-              <div class="col-md-2"></div>
-              <div class="col-md-10">
-                <form action="/users/post_comment/" method="post">
-                  <textarea name="comment" class="form-control" placeholder="write a message"></textarea>
-                  <input class="btn btn-success button" type="submit" value="Post">
-                  <input type="hidden" name="current_user_id" value="<?= $current_user_id; ?>">
-                  <input type="hidden" name="message_id" value="<?= $messages[$i]['message_id']; ?>">
-                  <input type="hidden" name="this_page_id" value="<?= $user['id']; ?>">
-                  <input type="hidden" name="action" value="comment">
-                </form>
-              </div>
-            </div> -->
+<?php
+            }
+          }
+          if($i == count($messages) - 1)
+          { 
+            ?>
+            <div class="row">
+              <form action="/users/post_comment" method="post">
+                <textarea name="comment" class="form-control" placeholder="Leave a message"></textarea>
+                  <div class="col-md-11"></div>
+                  <div class="col-md-1">
+                    <input class="btn btn-success button" type="submit" value="Post">
+                    <input type="hidden" name="current_user_id" value="<?= $current_user_id; ?>">
+                    <input type="hidden" name="message_id" value="<?= $messages[$i]['message_id']; ?>">
+                    <input type="hidden" name="message_id" value="<?= $messages[$i]['message_id']; ?>">
+                    <input type="hidden" name="this_page_id" value="<?= $user['id']; ?>">
+                    <input type="hidden" name="action" value="comment">
+                  </div>
+              </form>
+            </div>  
 <?php     }
+          else if($messages[$i]['message_id'] != $messages[$i + 1]['message_id'])
+          { ?>
+            <div class="row">
+              <form action="/users/post_comment" method="post">
+                <textarea name="comment" class="form-control" placeholder="Leave a message"></textarea>
+                  <div class="col-md-11"></div>
+                  <div class="col-md-1">
+                    <input class="btn btn-success button" type="submit" value="Post">
+                    <input type="hidden" name="current_user_id" value="<?= $current_user_id; ?>">
+                    <input type="hidden" name="message_id" value="<?= $messages[$i]['message_id']; ?>">
+                    <input type="hidden" name="message_id" value="<?= $messages[$i]['message_id']; ?>">
+                    <input type="hidden" name="this_page_id" value="<?= $user['id']; ?>">
+                    <input type="hidden" name="action" value="comment">
+                  </div>
+              </form>
+            </div>
+<?php     }
+        } 
 ?>
-    <div class="row">
-      <p class="col-md-3"><a href="">Mark Gullen</a> wrote</p>
-      <div class="col-md-7"></div>
-      <p class="col-md-2 push-right">7 hours ago</p>
-    </div>
-    <div class="row message">
-      <p class="col-md-12">Hi Michael! I'm having fun building BoomYEAH!</p>
-    </div>
-    <!-- End of Message -->
-    <!-- Start of comment -->
-    <div class="row">
-      <div class="col-md-1"></div>
-      <p class="col-md-3"><a href="">Diana Manlulu</a> wrote</p>
-      <p class="col-md-8 push-right">23 minutes ago</p>
-    </div>
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-11 comment">
-        <p>Awesome!</p>
-      </div>
-    </div>
-    <!-- End of comment -->
-    <!-- Start comment form -->
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-11">
-        <form action="" method="post">
-          <textarea name="" class="form-control" placeholder="write a message"></textarea>
-          <input class="btn btn-success button" type="button" value="Post">
-        </form>
-      </div>
-    </div>
-    <!-- End comment form -->
   </div>
 </body>
 </html>
