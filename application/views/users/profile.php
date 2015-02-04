@@ -23,11 +23,24 @@
     {
       border: 2px solid black;
       margin-bottom: 20px;
+      padding: 15px;
+    }
+
+    .push-right
+    {
+      text-align: right;
+    }
+    
+    h2
+    {
+      margin: 0px;
+      margin-bottom: 20px;
     }
 
     textarea
     {
       border: 1px solid black;
+      margin-bottom: 20px;
     }
 
     .success
@@ -40,11 +53,12 @@
   <?php $this->load->view('/partials/navbar_logged') ?>
   <div class="container">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <h2>Edit profile</h2>
       </div>
-      <div class="col-md-5"></div>
-      <a class="btn btn-primary col-md-2" href="/dashboard/">Return to Dashboard</a>
+      <div class="col-md-6 push-right">
+        <a class="btn btn-primary" href="/dashboard/">Return to Dashboard</a>
+      </div>
     </div> <!-- row -->
     <?php 
       if($this->session->flashdata('errors'))
@@ -77,8 +91,7 @@
           <input type="hidden" name="edit_id" value="<?= $user['id']; ?>">
         </form>
       </div>
-      <div class="col-md-1"></div>
-      <div class="col-md-5 form">
+      <div class="col-md-5 col-md-offset-1 form">
         <form action="/users/edit_password" method="post">
           <p>Change Password</p>
           <div class="form-group">

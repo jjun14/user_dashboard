@@ -22,6 +22,12 @@
     .form
     {
       border: 2px solid black;
+      padding: 15px;
+    }
+
+    h2
+    {
+      margin: 0px 0px 20px 0px;
     }
 
     .error

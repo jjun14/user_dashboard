@@ -32,43 +32,50 @@
   <?php $this->load->view('partials/navbar_default') ?>
   <div class="container">
     <div class="row">
-      <h4 class="col-lg-3">Register</h4>
-      <?php 
-        if($this->session->userdata('errors'))
-        {
-          echo $this->session->userdata('errors');
-          $this->session->unset_userdata('errors');
-        }
-      ?>
+      <div class="col-md-3 col-md-offset-4">
+        <h4>Register</h4>
+        <?php 
+          if($this->session->userdata('errors'))
+          {
+            echo $this->session->userdata('errors');
+            $this->session->unset_userdata('errors');
+          }
+        ?>
+      </div>
     </div>
     <div class="row">
-        <form action="/main/register" method="post">
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Email Address</span>
-            <input type="text" class="form-control" name="email" placeholder="Email Address" aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">First Name</span>
-            <input type="text" class="form-control" name="first_name" placeholder="First Name" aria-describedby="basic-addon1">
-          </div>          
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Last Name</span>
-            <input type="text" class="form-control" name="last_name" placeholder="Last Name" aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Password</span>
-            <input type="password" class="form-control" name="password" placeholder="Password" aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Password Confirmation</span>
-            <input type="password" class="form-control" name="confirm_password" placeholder="Password Confirmation" aria-describedby="basic-addon1">
-          </div>
-          <input class="btn btn-success" type="submit" value="Register">
-          <input type="hidden" name="action" value="register">
-        </form>
+      <div class="col-md-3 col-md-offset-4">
+          <form action="/main/register" method="post">
+            <div class="input-group">
+              <label for="email">Email Address:</label>
+              <input type="text" class="form-control" name="email" id="email" placeholder="Email Address">
+            </div>
+            <div class="input-group">
+              <label for="first_name">First Name:</label>
+              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
+            </div>          
+            <div class="input-group">
+              <label for="last_name">Last Name:</label>
+              <input type="text" class="form-control" name="last_name" id ="last_name" placeholder="Last Name">
+            </div>
+            <div class="input-group">
+              <label for="password">Password:</label>            
+              <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            </div>
+            <div class="input-group">
+              <label for="confirm_password">Confirm Password:</label>              
+              <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Password Confirmation">
+            </div>
+            <input class="btn btn-success" type="submit" value="Register">
+            <input type="hidden" name="action" value="register">
+          </form>
+        </div>
       </div>
+    </div>
       <div class="row">
-        <a href="/main/signin_page">Already have an account? Sign In!</a>
+        <div class="col-md-3 col-md-offset-4">
+          <a href="/main/signin_page">Already have an account? Sign In!</a>          
+        </div>
       </div>
     </div>
   </div><!-- container -->

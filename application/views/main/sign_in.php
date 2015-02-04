@@ -11,35 +11,45 @@
     {
       margin-bottom: 15px;
     }
+
+    .button
+    {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <?php $this->load->view('partials/navbar_default') ?>
   <div class="container">
     <div class="row">
-      <h4 class="col-lg-3">Sign In</h4>
-      <?php 
-        if($this->session->flashdata('errors'))
-        {
-          echo $this->session->flashdata('errors');
-        }
-      ?>
+      <div class="col-md-3 col-md-offset-4">
+        <h4>Sign In</h4>
+        <?php 
+          if($this->session->flashdata('errors'))
+          {
+            echo $this->session->flashdata('errors');
+          }
+        ?>
+      </div>
     </div>
     <div class="row">
+      <div class="col-md-3 col-md-offset-4">
         <form action="/main/sign_in" method="post">
           <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Email Address</span>
-            <input type="text" class="form-control" name="email" placeholder="Email Address" aria-describedby="basic-addon1">
+            <label for="email">Email Address:</label>
+            <input type="text" class="form-control" name="email" id="email" placeholder="Email Address">
           </div>
           <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Password</span>
-            <input type="password" class="form-control" name="password" placeholder="Username" aria-describedby="basic-addon1">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Username">
           </div>
-          <input class="btn btn-success" type="submit" value="Sign In">
+          <input class="btn btn-success button" type="submit" value="Sign In">
           <input type="hidden" name="action" value="sign_in">
         </form>
       </div>
-      <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-md-offset-4">
         <a href="/main/registration_page">Don't have an account? Register!</a>
       </div>
     </div>
